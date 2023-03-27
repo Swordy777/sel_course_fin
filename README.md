@@ -1,2 +1,2 @@
 # sel_course_fin
-123
+Final project repo for selenium course
