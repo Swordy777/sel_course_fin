@@ -1,4 +1,3 @@
-import time
 import pytest
 import requests
 
@@ -21,16 +20,13 @@ def pytest_addoption(parser):
                      help='specify the browser language with --language=langauge, ex. --language=en', type=typechecker)
     
 
-@pytest.fixture(autouse = True)
+@pytest.fixture
 def browser(request):
     options = Options()
     options.add_experimental_option('prefs',{'intl.accept_languages': request.config.getoption("--language")})
-    # ChromeDriver version in this repo: 111.0.5563.64 (might not work wuth some versions of Chrome)
-    # In case you are using Linux/WSL and don't have a chromedriver installed, use the following lines:
     #service = Service("/chromedriver/stable/chromedriver")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-gpu")
     #browser = webdriver.Chrome(options=options, service=service)
-    # (and don't forget to comment the other browser initialization):
     browser = webdriver.Chrome(options=options)
     return browser
