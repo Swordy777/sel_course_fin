@@ -13,16 +13,13 @@ class ProductPage(BasePage):
         product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE)
         product_price = self.digitize_price(product_price.text)
 
-        self.should_be_add_button()
-        self.browser.find_element(*ProductPageLocators.ADD_BUTTON).click()
+        self.click_add_button()
         self.solve_quiz_and_get_code()
 
         notifs = self.should_have_notifications()
         self.is_notif_product_name_correct(product_name)
         self.is_notif_basket_price_correct(product_price)
 
-
-        
     def should_be_product_name(self):
         assert self.is_element_present(*ProductPageLocators.PRODUCT_NAME), "Can't find product name"
 
@@ -34,7 +31,7 @@ class ProductPage(BasePage):
 
     def should_have_notifications(self):
         notifs = self.browser.find_elements(*ProductPageLocators.NOTIFICATION)
-        assert len(notifs) != 0, "No notifications about adding product to basket found"
+        assert len(notifs) != 0, "No notifications found after adding product to basket"
         return notifs
 
     def is_notif_product_name_correct(self, pname):
@@ -50,4 +47,9 @@ class ProductPage(BasePage):
         input = re.match(r"\D*(\d*[,.]\d*)\D*",input).group(1).replace(",",".")
         input = float(input)
         return input
+    
+    def click_add_button(self):
+        self.should_be_add_button()
+        self.browser.find_element(*ProductPageLocators.ADD_BUTTON).click()
+
         

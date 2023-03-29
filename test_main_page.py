@@ -1,6 +1,8 @@
+import pytest
 from .pages.main_page import MainPage
 from .pages.login_page import LoginPage
 
+@pytest.mark.mp_tests
 def test_guest_can_go_to_login_page(browser):
     link = "http://selenium1py.pythonanywhere.com/"
     page = MainPage(browser, link)
