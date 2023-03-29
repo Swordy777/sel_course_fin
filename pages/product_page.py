@@ -5,6 +5,26 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 class ProductPage(BasePage):
+    def click_add_button(self):
+        self.should_be_add_button()
+        self.browser.find_element(*ProductPageLocators.ADD_BUTTON).click()
+
+    def digitize_price(self, input):
+        input = re.match(r"\D*(\d*[,.]\d*)\D*",input).group(1).replace(",",".")
+        input = float(input)
+        return input
+
+    def is_notif_product_name_correct(self, pname):
+        notif_pname = self.browser.find_element(*ProductPageLocators.NOTIF_PRODUCT_NAME).text
+        assert notif_pname == pname, \
+            f"Product name on product page - '{pname}' and product name in the notification differ - '{notif_pname}', expected to match"
+
+    def is_notif_basket_price_correct(self, pprice):
+        notif_pprice = self.browser.find_element(*ProductPageLocators.NOTIF_PRODUCT_PRICE)
+        notif_pprice = self.digitize_price(notif_pprice.text)
+        assert notif_pprice == pprice, \
+            f"Basket total cost in notification - '{notif_pprice}' differs from product price - '{pprice}', expected to match"
+
     def should_be_able_to_add_product_to_basket(self):
         self.should_be_product_name()
         product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
@@ -34,22 +54,10 @@ class ProductPage(BasePage):
         assert len(notifs) != 0, "No notifications found after adding product to basket"
         return notifs
 
-    def is_notif_product_name_correct(self, pname):
-        notif_pname = self.browser.find_element(*ProductPageLocators.NOTIF_PRODUCT_NAME).text
-        assert notif_pname == pname, f"Product name on product page - '{pname}' and product name in the notification differ - '{notif_pname}', expected to match"
 
-    def is_notif_basket_price_correct(self, pprice):
-        notif_pprice = self.browser.find_element(*ProductPageLocators.NOTIF_PRODUCT_PRICE)
-        notif_pprice = self.digitize_price(notif_pprice.text)
-        assert notif_pprice == pprice, f"Basket total cost in notification - '{notif_pprice}' differs from product price - '{pprice}', expected to match"
     
-    def digitize_price(self, input):
-        input = re.match(r"\D*(\d*[,.]\d*)\D*",input).group(1).replace(",",".")
-        input = float(input)
-        return input
+
     
-    def click_add_button(self):
-        self.should_be_add_button()
-        self.browser.find_element(*ProductPageLocators.ADD_BUTTON).click()
+
 
         
