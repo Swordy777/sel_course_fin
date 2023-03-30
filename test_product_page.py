@@ -10,17 +10,16 @@ LOGIN_URL = "https://selenium1py.pythonanywhere.com/ru/accounts/login/"
 @pytest.mark.need_review
 @pytest.mark.nine_offers
 @pytest.mark.parametrize('query_p', ["/?promo=offer1",
-                                    "/?promo=offer2",
-                                    "/?promo=offer3",
-                                    "/?promo=offer4",
-                                    "/?promo=offer5",
-                                    "/?promo=offer6",
-                                    pytest.param("/?promo=offer7", marks=pytest.mark.xfail\
-                                    (reason="The name of the product in the notification is incorrect; test is expected to fail")),
-                                    "/?promo=offer8",
-                                    "/?promo=offer9"])
+                                     "/?promo=offer2",
+                                     "/?promo=offer3",
+                                     "/?promo=offer4",
+                                     "/?promo=offer5",
+                                     "/?promo=offer6",
+                                     pytest.param("/?promo=offer7", marks=pytest.mark.xfail\
+                                     (reason="The name of the product in the notification is incorrect; test is expected to fail")),
+                                     "/?promo=offer8",
+                                     "/?promo=offer9"])
 def test_guest_can_add_product_to_basket(browser, query_p):
-    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
     product_page = ProductPage(browser, PRODUCT_URL + query_p)
     product_page.open()
     product_page.should_be_able_to_add_product_to_basket()
