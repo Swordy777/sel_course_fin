@@ -10,7 +10,7 @@ class LoginPage(BasePage):
 
     def should_be_login_url(self):
         # реализуйте проверку на корректный url адрес
-        assert re.match(r".*(login/)$", self.browser.current_url), "Page doesn't end in login/"
+        assert re.match(r".*(login/)$", self.browser.current_url), "Page doesn't end in 'login/'"
 
     def should_be_login_form(self):
         # реализуйте проверку, что есть форма логина
