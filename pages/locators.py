@@ -7,6 +7,7 @@ class BasePageLocators():
     SUCCESS_NOTIF = (By.CSS_SELECTOR,".alert-success")
     INFO_NOTIF = (By.CSS_SELECTOR, ".alert-info")
     WARNING_NOTIF = (By.CSS_SELECTOR, ".alert-warning")
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
 
 class BasketPageLocators():
     BASKET_TITLE = (By.CSS_SELECTOR,".basket-title")
@@ -16,6 +17,10 @@ class BasketPageLocators():
 class LoginPageLocators():
     LOGIN_FORM = (By.CSS_SELECTOR, "#login_form")
     REGISTER_FORM = (By.CSS_SELECTOR, "#register_form")
+    REG_EMAIL_FIELD = (By.NAME, "registration-email")
+    REG_PASS = (By.NAME, "registration-password1")
+    REG_PASS_CONFIRM = (By.NAME, "registration-password2")
+    REG_BUTTON = (By.NAME, "registration_submit")
 
 class ProductPageLocators():
     ADD_BUTTON = (By.CSS_SELECTOR, "button.btn-add-to-basket")

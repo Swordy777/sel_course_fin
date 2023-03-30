@@ -1,8 +1,6 @@
 import re
 from .base_page import BasePage
 from .locators import ProductPageLocators, BasePageLocators
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 class ProductPage(BasePage):
     def click_add_button(self):
@@ -37,6 +35,8 @@ class ProductPage(BasePage):
         self.solve_quiz_and_get_code()
 
         notifs = self.should_have_notifications()
+        for notif in notifs:
+            print(notif.text)
         self.is_notif_product_name_correct(product_name)
         self.is_notif_basket_price_correct(product_price)
 

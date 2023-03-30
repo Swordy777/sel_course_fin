@@ -30,5 +30,3 @@ class BasketPage(BasePage):
 
     def should_not_be_basket_items(self):
         assert self.is_not_element_present(*BasketPageLocators.BASKET_ITEMS), "Expected basket items to not appear"
-
-    git
