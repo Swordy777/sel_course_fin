@@ -1,6 +1,6 @@
 import re
 from .base_page import BasePage
-from .locators import ProductPageLocators
+from .locators import ProductPageLocators, BasePageLocators
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -50,7 +50,7 @@ class ProductPage(BasePage):
         assert self.is_element_present(*ProductPageLocators.ADD_BUTTON), "Can't find add button"
 
     def should_have_notifications(self):
-        notifs = self.browser.find_elements(*ProductPageLocators.NOTIFICATION)
+        notifs = self.browser.find_elements(*BasePageLocators.NOTIFICATION)
         assert len(notifs) != 0, "No notifications found after adding product to basket"
         return notifs
 
